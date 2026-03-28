@@ -62,3 +62,62 @@ npm install
 cd ../frontend
 npm install
 cd ..
+
+### Step 2: Boot the Blockchain
+1. Open the **Ganache** application and start a local workspace (RPC Server: `HTTP://127.0.0.1:7545`).
+2. Open your browser and navigate to [Remix IDE](https://remix.ethereum.org/).
+3. Create a new file in Remix and paste the code from `/blockchain/HomeSecurity.sol`.
+4. Compile the contract using compiler version `0.8.x`.
+5. Go to the "Deploy & Run Transactions" tab in Remix. Change the Environment to **"Dev - Ganache Provider"**.
+6. Click **Deploy**.
+7. Copy the deployed **Contract Address** from the console/bottom-left panel.
+
+### Step 3: Configure the Backend Relayer
+1. Navigate to the `/backend` folder.
+2. Create a file named `.env` and configure your keys:
+```env
+PORT=5000
+CONTRACT_ADDRESS=0xYourDeployedContractAddressHere
+PRIVATE_KEY=0xYourGanacheAccountPrivateKeyHere
+```
+3. Open a dedicated terminal for the backend and start the server:
+```bash
+cd backend
+node index.js
+```
+*(You should see "Wallet loaded" and "MQTT Connected" in the console).*
+
+### Step 4: Start the IoT Simulation
+1. Go to [Wokwi](https://wokwi.com) and create a new ESP32 project.
+2. Upload the 4 files located in the `/iot` folder (`sketch.ino`, `diagram.json`, `libraries.txt`, `wokwi-project.txt`) to the simulation environment.
+3. Click the green **Play** button. Wait for the terminal to print `WiFi connected!` and `Connected to HiveMQ!`.
+
+### Step 5: Boot the Frontend Dashboard
+1. Navigate to the `/frontend` folder and open `src/App.jsx` (or wherever you defined the contract address).
+2. Ensure the `CONTRACT_ADDRESS` variable matches the one you deployed in Step 2.
+3. Open a **second, separate terminal** for the frontend and run the development server:
+```bash
+cd frontend
+npm run dev
+```
+4. Open your browser to `http://localhost:5173`.
+
+---
+
+## 🎮 Usage Instructions
+With both servers running and Wokwi active:
+1. Arrange your windows so you can see the React Dashboard and the Wokwi simulation side-by-side.
+2. Click **"Unlock"** on the Main Door card.
+3. Watch the Wokwi servo motor actuate instantly.
+4. Check the backend terminal to see the Ethers.js transaction confirmation.
+5. Click **"Refresh"** on the frontend Blockchain Ledger to view the immutable cryptographic log.
+
+---
+
+## 👥 Team
+* **Abhikalp Shikhar** (1230440002) - Frontend Development
+* **Shobhit Kumar** (1230440050) - Backend / Relayer API
+* **Suryansh Soni** (1230440054) - Blockchain / Smart Contracts
+* **Vansh Dixit** (1230440060) - IoT Hardware Simulation
+
+**Babu Banarasi Das University, Lucknow** *B.Tech CSE (IOTBC-3A) | Minor Project 2025* *Under the supervision of Assistant Professor Saurabh Pandey*
