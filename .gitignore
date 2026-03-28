@@ -116,3 +116,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+
+# --- CUSTOM SMART HOME PROJECT OVERRIDES ---
+backend/node_modules/
+frontend/node_modules/
+backend/.env
+frontend/.env
