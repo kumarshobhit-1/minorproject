@@ -4,8 +4,38 @@ import { ethers } from 'ethers';
 import { Power, Fan, Lightbulb, Lock, Unlock, ShieldAlert } from 'lucide-react';
 
 // !!! IMPORTANT: Paste your actual deployed Contract Address and ABI here !!!
-const CONTRACT_ADDRESS = "0x6fa956F6a1337c397F293A8dE241905A7799DCC8";
+const CONTRACT_ADDRESS = "0x5D4CeC71205c869c9c5047373657ef24c2F33f83";
 const CONTRACT_ABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "action",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "user",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "LogAdded",
+		"type": "event"
+	},
 	{
 		"inputs": [
 			{
@@ -25,6 +55,19 @@ const CONTRACT_ABI = [
 			}
 		],
 		"name": "addLog",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_action",
+				"type": "string"
+			}
+		],
+		"name": "addLogAuto",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -54,6 +97,19 @@ const CONTRACT_ABI = [
 				"internalType": "struct HomeSecurity.Log[]",
 				"name": "",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
